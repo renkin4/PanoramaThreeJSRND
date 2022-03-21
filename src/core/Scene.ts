@@ -18,8 +18,7 @@ export default defineComponent({
         };
     },
     created() {
-        
-
+         
     },
     render() {
         return this.$slots.default ? this.$slots.default() : []
