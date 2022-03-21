@@ -1,14 +1,21 @@
-import { defineComponent, inject } from "vue";
-import { RendererInjectionKey } from "./Renderer";
+import { Scene } from "three";
+import { defineComponent, InjectionKey } from "vue"; 
+
+export const SceneInjectionKey: InjectionKey<Scene> = Symbol('Scene')
 
 export default defineComponent({
     name : 'Scene',
-    setup() {
-        const renderer = inject(RendererInjectionKey);
-        console.log(renderer);
-        return {
-            renderer,
+    setup() { 
+        const scene = new Scene();
+
+        return { 
+            scene
         }
+    },
+    provide() {
+        return{
+            [SceneInjectionKey as symbol] : this.scene,
+        };
     },
     created() {
         

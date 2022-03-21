@@ -30,7 +30,7 @@ export default defineComponent({
     },
     mounted() {
         const { canvas, renderer } = this; 
-
+        
         // Insert Canvas Into the App div
         this.$el.parentNode.insertBefore(canvas, this.$el);
     },
