@@ -1,1 +1,2 @@
-export { default as Renderer } from './Renderer';
+export { default as Renderer, RendererInjectionKey } from './Renderer';
+export { default as Scene } from './Scene';

@@ -1,12 +1,12 @@
 <template>
   <Renderer antialias>
-
+    <Scene/>
   </Renderer>
  
 </template>
 
 <script setup lang="ts">
-import { Renderer } from './core';
+import { Renderer, Scene } from './core';
 </script>
 
 <style> 
