@@ -1,12 +1,21 @@
 <template>
-  <Renderer antialias>
-    <Scene/>
-  </Renderer>
- 
+  <Scene>
+    <Renderer antialias>
+      <PerspectiveCamera
+        :fov="75"
+        :aspect="aspectRatio"
+        :position="new Vector3(0, 0, 5)"
+      />
+    </Renderer>
+  </Scene>
 </template>
 
 <script setup lang="ts">
-import { Renderer, Scene } from './core';
+import { Vector3 } from "three";
+import { Renderer, Scene, PerspectiveCamera } from './core';
+
+let aspectRatio = window.innerWidth / window.innerHeight;
+
 </script>
 
 <style> 

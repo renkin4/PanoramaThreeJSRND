@@ -20,7 +20,10 @@ export default defineComponent({
         const { fov, aspect, near, far, position, lookAt } = props;
 
         const renderer = inject(RendererInjectionKey);
-        console.assert(renderer != null);
+        console.log(renderer);
+        if(!renderer){
+            console.error("Renderer Not Injected");
+        }
 
         const camera = new PerspectiveCamera(fov, aspect, near, far);
         camera.position.x = position.x || 0;

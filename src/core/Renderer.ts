@@ -26,9 +26,12 @@ export default defineComponent({
         // TODO change this to the parent's div Width and height
         renderer.setSize( window.innerWidth, window.innerHeight );
         
+        const renderFn: {(): void} = () => {}
+
         return {
             canvas,
-            renderer
+            renderer,
+            renderFn
         };
     },
     mounted() {
