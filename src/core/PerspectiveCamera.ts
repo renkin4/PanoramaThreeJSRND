@@ -39,7 +39,6 @@ export default defineComponent({
         
         // Hack 
         renderer.renderFn = () : void => {
-            console.log("hello");
             renderer.renderer.render(scene, camera);
         };
 
