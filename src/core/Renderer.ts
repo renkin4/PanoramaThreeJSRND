@@ -1,11 +1,14 @@
 import { WebGLRenderer } from "three";
-import { defineComponent, InjectionKey, PropType } from "vue";
+import { ComponentPublicInstance, defineComponent, InjectionKey, PropType } from "vue";
+
+export interface RendererInterface {
+    canvas: HTMLCanvasElement,
+    webGLRenderer: WebGLRenderer,
+}
+
+export interface RendererPublicInterface extends ComponentPublicInstance, RendererInterface  {}
 
 export const RendererInjectionKey : InjectionKey<WebGLRenderer> = Symbol('Renderer');
-
-interface RendererSetupInterface {
-    canvas: HTMLCanvasElement
-}
 
 export default defineComponent({
     name : 'Renderer',
@@ -36,7 +39,7 @@ export default defineComponent({
     },
     provide() {
         return {
-            [RendererInjectionKey as symbol] : this.renderer,
+            [RendererInjectionKey as symbol] : this,
         } 
     },
     render() {
