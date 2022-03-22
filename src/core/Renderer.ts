@@ -3,12 +3,13 @@ import { ComponentPublicInstance, defineComponent, InjectionKey, PropType } from
 
 export interface RendererInterface {
     canvas: HTMLCanvasElement,
-    webGLRenderer: WebGLRenderer,
+    renderer: WebGLRenderer,
+    renderFn : {(time: Number): void},
 }
 
 export interface RendererPublicInterface extends ComponentPublicInstance, RendererInterface  {}
 
-export const RendererInjectionKey : InjectionKey<WebGLRenderer> = Symbol('Renderer');
+export const RendererInjectionKey : InjectionKey<RendererPublicInterface> = Symbol('Renderer');
 
 export default defineComponent({
     name : 'Renderer',
@@ -16,6 +17,11 @@ export default defineComponent({
         resize : { type : [Boolean, String] as PropType<boolean | string>, default :false },
         antialias : Boolean,
         alpha : Boolean,
+    },
+    provide() {
+        return {
+            [RendererInjectionKey as symbol] : this,
+        } 
     },
     setup(props, { attrs }) {
         const { antialias, alpha } = props;
@@ -25,8 +31,8 @@ export default defineComponent({
 
         // TODO change this to the parent's div Width and height
         renderer.setSize( window.innerWidth, window.innerHeight );
-        
-        const renderFn: {(): void} = () => {}
+
+        const renderFn: {(time: Number): void} = () => {}
 
         return {
             canvas,
@@ -36,14 +42,20 @@ export default defineComponent({
     },
     mounted() {
         const { canvas, renderer } = this; 
-        
+
+        requestAnimationFrame(this.renderLoop);
+
         // Insert Canvas Into the App div
         this.$el.parentNode.insertBefore(canvas, this.$el);
-    },
-    provide() {
-        return {
-            [RendererInjectionKey as symbol] : this,
-        } 
+    }, 
+    methods:{
+        render(time: number) {  
+            this.renderFn(time);
+        },
+        renderLoop(time: number) {
+            requestAnimationFrame(this.renderLoop);
+            this.render(time);
+        },
     },
     render() {
         return this.$slots.default ? this.$slots.default() : []
