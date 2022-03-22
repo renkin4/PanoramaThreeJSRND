@@ -1,28 +1,33 @@
-import { defineComponent, inject } from "vue";
+import { Object3D, Scene } from "three";
+import { ComponentPublicInstance, defineComponent } from "vue";
 import { RendererInjectionKey, SceneInjectionKey } from "./index";
+import { RendererInterface } from "./Renderer";
 
+export interface Object3DSetupInterface {
+    renderer?: RendererInterface
+    scene?: Scene
+    o3d?: Object3D
+    parent?: ComponentPublicInstance
+}
 
-export const Object3D = defineComponent({
+export default defineComponent({
     name : 'Object3D',
     props : {},
-    setup(props){ 
-        const renderer = inject(RendererInjectionKey);
-        const scene = inject(SceneInjectionKey);
-
-        return {
-            renderer,
-            scene,
-        }
+    inject: {
+        renderer: RendererInjectionKey as symbol,
+        scene: SceneInjectionKey as symbol,
     },
-    created(){
-        console.log(this.renderer);
+    setup(props) : Object3DSetupInterface { 
+        return {}
+    },
+    created() {
         if (!this.renderer) {
-            console.error('Missing parent Renderer')
+            console.error('Missing parent Renderer');
+            return;
         }
     },
     render() {
         return this.$slots.default ? this.$slots.default() : []
     },
 });
-
-export default Object3D;
+ 
