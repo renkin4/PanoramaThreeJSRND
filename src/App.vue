@@ -1,26 +1,16 @@
 <template>
-  <Scene>
-    <Renderer antialias>
-      <PerspectiveCamera
-        :fov="75"
-        :aspect="aspectRatio"
-        :position="new Vector3(0, 0, 5)"
-      /> 
+ <Renderer ref="renderer" antialias :orbit-ctrl="{ enableDamping: true }" resize="window">
+    <Camera :position="{ z: 10 }" />
+    <Scene>
+      <PointLight :position="{ y: 50, z: 50 }" />
       <Box :size="1" ref="box" :rotation="{ y: Math.PI / 4, z: Math.PI / 4 }">
-        <BasicMaterial />
+        <LambertMaterial />
       </Box>
-    </Renderer>
-  </Scene>
+    </Scene>
+  </Renderer>
 </template>
 
 <script setup lang="ts">
-import { Vector3 } from "three"; 
-import { Renderer, Scene, PerspectiveCamera } from './core';
-import BasicMaterial from "./materials/BasicMaterial"
-import Box from "./meshes/Box";
-
-let aspectRatio = window.innerWidth / window.innerHeight; 
-
 </script>
 
 <style>  

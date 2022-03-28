@@ -11,6 +11,7 @@
     "@types/three": "^0.138.0",
     "three": "^0.138.3",
     "tiny-emitter": "^2.1.0",
+    "troisjs": "^0.3.4",
     "vue": "^3.2.25"
   },
   "devDependencies": {
