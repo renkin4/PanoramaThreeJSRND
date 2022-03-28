@@ -1,5 +1,5 @@
 import { BufferGeometry, Material, Mesh as TMesh } from "three";
-import { defineComponent, ComponentPublicInstance, InjectionKey, ComponentPropsOptions } from "vue";
+import { defineComponent, ComponentPublicInstance, InjectionKey, ComponentPropsOptions, watch } from "vue";
 import Object3D, { Object3DSetupInterface } from "../core/Object3D";
 
 export interface MeshSetupInterface extends Object3DSetupInterface {
@@ -7,7 +7,6 @@ export interface MeshSetupInterface extends Object3DSetupInterface {
     geometry?: BufferGeometry,
     material? : Material,
 }
-
 
 export interface MeshInterface extends MeshSetupInterface {
     setGeometry(g: BufferGeometry): void
