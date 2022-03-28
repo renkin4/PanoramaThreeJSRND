@@ -25,12 +25,17 @@ export default defineComponent({
             console.error('Missing parent Renderer');
             return;
         }
+            
+        if (!this.scene) {
+            console.error('Missing parent Scene')
+        }
     },
     methods: {
         InitObject3D(o3d: Object3D) {
             this.o3d = o3d
             o3d.userData.component = this
 
+            this.scene?.add(o3d);
         }
     },
     render() {
