@@ -26,6 +26,13 @@ export default defineComponent({
             return;
         }
     },
+    methods: {
+        InitObject3D(o3d: Object3D) {
+            this.o3d = o3d
+            o3d.userData.component = this
+            
+        }
+    },
     render() {
         return this.$slots.default ? this.$slots.default() : []
     },
