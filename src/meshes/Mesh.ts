@@ -8,8 +8,13 @@ export interface MeshSetupInterface extends Object3DSetupInterface {
     material? : Material,
 }
 
-export interface MeshPublicInterface extends ComponentPublicInstance {}
 
+export interface MeshInterface extends MeshSetupInterface {
+    setGeometry(g: BufferGeometry): void
+    setMaterial(m: Material): void
+}
+
+export interface MeshPublicInterface extends ComponentPublicInstance {} 
 export const MeshInjectionKey: InjectionKey<MeshPublicInterface> = Symbol('Mesh')
 
 const Mesh = defineComponent({
@@ -78,20 +83,20 @@ export function meshComponent<P extends Readonly<ComponentPropsOptions>>(
     name: string,
     props: P,
     createGeometry: {(c: any): BufferGeometry}
-  ) {
+) {
     return defineComponent({
-      name,
-      extends: Mesh,
-      props,
-      created() {
-        this.createGeometry()
-        this.addGeometryWatchers(props)
-      },
-      methods: {
-        createGeometry() {
-          this.geometry = createGeometry(this)
+        name,
+        extends: Mesh,
+        props,
+        created() {
+            this.createGeometry()
+            this.addGeometryWatchers(props)
         },
-      },
+        methods: {
+            createGeometry() {
+                this.geometry = createGeometry(this)
+            },
+        },
     })
-  }
+}
   
