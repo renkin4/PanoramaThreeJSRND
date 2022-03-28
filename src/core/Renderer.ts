@@ -26,7 +26,18 @@ export default defineComponent({
     setup(props, { attrs }) {
         const { antialias, alpha } = props;
 
-        const canvas = document.createElement('canvas');
+        const canvasStyle = {
+            position : "fixed",
+            top : 0,
+            left : 0,
+            width : "100%",
+            height : "100%",
+            zIndex : -1,
+        };
+
+        const canvas = document.createElement('canvas'); 
+        Object.assign(canvas.style, canvasStyle);
+
         const renderer = new WebGLRenderer({ canvas, antialias, alpha });
 
         // TODO change this to the parent's div Width and height

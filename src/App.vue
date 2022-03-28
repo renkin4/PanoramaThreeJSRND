@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <h1> Hello World </h1>
+  </div>
   <Scene>
     <Renderer antialias>
       <PerspectiveCamera
@@ -14,8 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { Vector3 } from "three";
-import { onMounted, ref } from "vue";
+import { Vector3 } from "three"; 
 import { Renderer, Scene, PerspectiveCamera } from './core';
 import { BasicMaterial } from "./materials/Material";
 import Box from "./meshes/Box";
@@ -25,4 +27,7 @@ let aspectRatio = window.innerWidth / window.innerHeight;
 </script>
 
 <style> 
+h1{
+  color : White;
+}
 </style>
