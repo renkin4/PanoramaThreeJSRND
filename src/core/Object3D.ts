@@ -1,5 +1,5 @@
 import { Object3D, Scene } from "three";
-import { ComponentPublicInstance, defineComponent, PropType, watch } from "vue";
+import { ComponentPublicInstance, defineComponent, InjectionKey, PropType, watch } from "vue";
 import { bindProp } from "../utils/tools";
 import { RendererInjectionKey, SceneInjectionKey } from "./index";
 import { RendererInterface } from "./Renderer";
@@ -11,6 +11,15 @@ export interface Object3DSetupInterface {
     o3d?: Object3D
     parent?: ComponentPublicInstance
 }
+
+
+export interface Object3DInterface extends Object3DSetupInterface {
+    add(o: Object3D): void
+    remove(o: Object3D): void
+}
+
+export interface Object3DPublicInterface extends ComponentPublicInstance, Object3DInterface {}
+export const Object3DInjectionKey : InjectionKey<Object3DPublicInterface> = Symbol('Object3D');
 
 export default defineComponent({
     name : 'Object3D',
@@ -26,6 +35,11 @@ export default defineComponent({
         renderer: RendererInjectionKey as symbol,
         scene: SceneInjectionKey as symbol,
     },
+    provide() {
+        return {
+            [Object3DInjectionKey as symbol]: this,
+        }
+    },
     setup(props) : Object3DSetupInterface { 
         return {}
     },
@@ -40,7 +54,7 @@ export default defineComponent({
         }
     },
     methods: {
-        InitObject3D(o3d: Object3D) {
+        initObject3D(o3d: Object3D) {
             this.o3d = o3d
             o3d.userData.component = this
 
@@ -54,7 +68,9 @@ export default defineComponent({
             watch(() => this.lookAt, (v) => { o3d.lookAt(v.x ?? 0, v.y, v.z) }, { deep: true })
       
             this.scene?.add(o3d);
-        }
+        }, 
+        add(o: Object3D) { this.o3d?.add(o) },
+        remove(o: Object3D) { this.o3d?.remove(o) },
     },
     render() {
         return this.$slots.default ? this.$slots.default() : []

@@ -23,8 +23,5 @@ let aspectRatio = window.innerWidth / window.innerHeight;
 
 </script>
 
-<style> 
-h1{
-  color : White;
-}
+<style>  
 </style>
