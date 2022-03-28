@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { Vector3 } from "three"; 
 import { Renderer, Scene, PerspectiveCamera } from './core';
-import { BasicMaterial } from "./materials/Material";
+import BasicMaterial from "./materials/BasicMaterial"
 import Box from "./meshes/Box";
 
 let aspectRatio = window.innerWidth / window.innerHeight; 
