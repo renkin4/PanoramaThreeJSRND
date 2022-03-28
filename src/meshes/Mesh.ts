@@ -41,7 +41,7 @@ const Mesh = defineComponent({
             // Bind Props to Mesh
 
             this.mesh = mesh;
-            this.InitObject3D(this.mesh);
+            this.initObject3D(this.mesh);
         },
         createGeometry() {},
         addGeometryWatchers(props: Readonly<ComponentPropsOptions>) {
