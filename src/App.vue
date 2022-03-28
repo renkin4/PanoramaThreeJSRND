@@ -1,5 +1,5 @@
 <template>
-  <Scene ref="myScene">
+  <Scene>
     <Renderer antialias>
       <PerspectiveCamera
         :fov="75"
@@ -17,19 +17,10 @@
 import { Vector3 } from "three";
 import { onMounted, ref } from "vue";
 import { Renderer, Scene, PerspectiveCamera } from './core';
-import { SceneSetupInterface } from './core/Scene';
 import { BasicMaterial } from "./materials/Material";
 import Box from "./meshes/Box";
 
-let aspectRatio = window.innerWidth / window.innerHeight;
-let myScene = ref(null);
-
-onMounted(()=>{
-  const scene = myScene?.value as unknown as SceneSetupInterface;
-  setTimeout(()=>{
-    console.log(scene.scene);
-  }, 1000);
-});
+let aspectRatio = window.innerWidth / window.innerHeight; 
 
 </script>
 
